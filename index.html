@@ -11,260 +11,238 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a001f 50%, #000000 100%);
+            background: radial-gradient(circle at center, #1a001f 0%, #000000 100%);
             font-family: 'Poppins', sans-serif;
             overflow: hidden; color: #ffffff; user-select: none;
-            perspective: 1200px; height: 100vh; width: 100vw;
+            height: 100vh; width: 100vw;
         }
 
-        /* Instagram Header Fixed Top */
-        .insta-tag {
-            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 2000; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .insta-tag span {
-            font-weight: 700; font-size: 1rem;
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .header-tag {
+            position: fixed; top: 15px; width: 100%; text-align: center;
+            z-index: 1000; font-family: 'Dancing Script', cursive;
+            color: #ffb3d9; font-size: 1.5rem; letter-spacing: 2px;
+            text-shadow: 0 0 20px #ff00cc; pointer-events: none;
         }
 
-        /* Smooth Slides */
+        /* Smooth & Fast Transitions */
         .slide {
             display: none; position: fixed; inset: 0; width: 100%; height: 100%;
             align-items: center; justify-content: center; flex-direction: column;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            opacity: 0; z-index: 20; padding: 20px; text-align: center;
-            transform: scale(0.9) translateZ(-100px);
+            padding: 20px; text-align: center; z-index: 20;
+            opacity: 0; transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            will-change: opacity, transform;
         }
-        .slide.active { display: flex; opacity: 1; transform: scale(1) translateZ(0); }
+        .slide.active { display: flex; opacity: 1; transform: scale(1); }
 
-        /* Ultra Glow Text (Fixed Visibility) */
         .cute-msg { 
             font-family: 'Dancing Script', cursive; 
-            font-size: clamp(2.2rem, 9vw, 4.2rem); font-weight: 700;
-            color: #fff; margin: 15px 0;
-            text-shadow: 0 0 20px #ff00cc, 0 0 40px #ff00cc, 0 0 60px #ff00cc;
-            animation: glowPulse 2s infinite alternate;
+            color: #ffebf5; text-shadow: 0 0 25px #ff00cc, 0 0 45px #ff00cc; 
+            font-size: clamp(2.2rem, 8vw, 3.5rem); margin: 15px 0; font-weight: 700; 
         }
-        @keyframes glowPulse {
-            from { transform: scale(1); text-shadow: 0 0 20px #ff00cc; }
-            to { transform: scale(1.03); text-shadow: 0 0 40px #ff69b4, 0 0 70px #ff00cc; }
-        }
-
         .sub-text { 
-            color: #fff; font-weight: 600; font-size: 1.1rem; 
-            text-shadow: 0 2px 15px rgba(0,0,0,1); max-width: 90%; 
-            line-height: 1.4; margin-bottom: 20px;
+            color: #ffffff; font-weight: 600; font-size: 1.1rem; 
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8); line-height: 1.4;
         }
-
-        /* 3D GIF Frame */
+        
         .gif-frame { 
-            width: 260px; height: 260px; border-radius: 25px; 
-            border: 4px solid #ff00cc;
-            box-shadow: 0 0 40px rgba(255, 0, 204, 0.6);
-            object-fit: cover; transform: rotateY(-10deg);
+            width: 240px; height: 240px; border-radius: 30px; 
+            border: 3px solid #ff00cc; box-shadow: 0 0 40px rgba(255, 0, 204, 0.6); 
+            object-fit: cover; margin-bottom: 10px;
         }
 
-        /* Smooth Glow Button */
         .glow-btn { 
-            background: linear-gradient(45deg, #ff00cc, #ff69b4);
-            padding: 16px 40px; border-radius: 50px; font-weight: 800; 
-            box-shadow: 0 10px 30px rgba(255,0,204,0.5);
-            color: white; border: none; font-size: 1.1rem;
-            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            background: linear-gradient(45deg, #ff00cc, #ff69b4); 
+            padding: 15px 40px; border-radius: 50px; font-weight: 700; 
+            box-shadow: 0 0 25px rgba(255, 0, 204, 0.5); 
+            cursor: pointer; color: white; border: none; font-size: 1.1rem;
+            transition: 0.2s; margin-top: 20px;
         }
         .glow-btn:active { transform: scale(0.9); }
-
-        /* Solar System 3D */
-        .solar-system { 
-            position: relative; width: 280px; height: 280px; 
-            display: flex; align-items: center; justify-content: center;
-            transform-style: preserve-3d;
-        }
-        .orbit { 
-            position: absolute; border: 1px solid rgba(255,105,180,0.5); 
-            border-radius: 50%; animation: spin linear infinite; 
-        }
-        .orbit-1 { width: 140px; height: 140px; animation-duration: 5s; }
-        .orbit-2 { width: 240px; height: 240px; animation-duration: 10s; }
+        
+        /* 3D Solar System */
+        .solar-system { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; }
+        .orbit { position: absolute; border: 2px solid rgba(255,105,180,0.4); border-radius: 50%; animation: spin linear infinite; }
+        .orbit-1 { width: 170px; height: 170px; animation-duration: 5s; }
+        .orbit-2 { width: 260px; height: 260px; animation-duration: 9s; animation-direction: reverse; }
+        .planet { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 28px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Hold Bar */
-        .hold-container { 
-            width: 250px; height: 15px; background: rgba(255,255,255,0.1); 
-            border-radius: 20px; margin: 25px 0; overflow: hidden; border: 2px solid #ff00cc;
-        }
-        #holdProgress { height: 100%; width: 0%; background: #ff00cc; box-shadow: 0 0 20px #ff00cc; }
-
-        /* Full Screen Video (FIXED) */
-        #videoLayer { 
-            display: none; position: fixed; inset: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 10000;
-        }
-        #vPlayer { width: 100%; height: 100%; object-fit: cover; }
-
         /* Stars */
-        .star { position: absolute; background: white; border-radius: 50%; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d) infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* Hold Bar */
+        .hold-container { width: 260px; height: 14px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 20px; overflow: hidden; border: 1px solid #ff00cc; }
+        #holdProgress { height: 100%; background: #ff00cc; width: 0%; box-shadow: 0 0 20px #ff00cc; transition: width 0.1s linear; }
+
+        /* Video Layer */
+        #videoLayer { display: none; position: fixed; inset: 0; background: black; z-index: 10000; align-items: center; justify-content: center; }
+        video { width: 100%; height: 100%; object-fit: contain; }
+
+        .insta-tag { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 0.9rem; color: #ffb3d9; opacity: 0.7; z-index: 1000; }
     </style>
 </head>
-<body onclick="initAudio()">
+<body>
 
-    <div class="insta-tag">
-        <span>📸 Follow on Instagram - @smss1708</span>
-    </div>
+    <div class="header-tag">Follow on insta - @smss1708 💗</div>
 
-    <audio id="bgMusic" loop src="tere-liye.mp3"></audio>
-    <div id="stars-container" class="fixed inset-0"></div>
+    <audio id="bgMusic" loop src="tere-liye.mp3" preload="auto"></audio>
+    <div id="stars-container" class="fixed inset-0 pointer-events-none"></div>
 
     <div id="slide1" class="slide active">
         <img src="gif1.gif" class="gif-frame">
         <h1 class="cute-msg">Hey Gorgeous! ✨</h1>
-        <p class="sub-text">We just met, but my heart already knew it was you! 💖</p>
-        <button onclick="next()" class="glow-btn">💕 Touch My Heart 🥺</button>
+        <p class="sub-text">We just met, but my heart already knew it was you!</p>
+        <button onclick="startApp()" class="glow-btn">Touch My Heart 🥺</button>
     </div>
 
     <div id="slide2" class="slide">
         <img src="gif2.gif" class="gif-frame">
-        <h1 class="cute-msg">How are you so cute? 😍</h1>
-        <p class="sub-text">Seriously, your smile is the highlight of my entire day! 🌟</p>
-        <button onclick="next()" class="glow-btn">💖 Next Page</button>
+        <h1 class="cute-msg">How are you so cute?</h1>
+        <p class="sub-text">Seriously, your smile is the highlight of my day!</p>
+        <button onclick="next()" class="glow-btn">See More 💕</button>
     </div>
 
     <div id="slide3" class="slide">
         <img src="gif3.gif" class="gif-frame">
-        <h1 class="cute-msg">Our Vibe is Rare! 😌✨</h1>
-        <p class="sub-text">Talking to you feels like time has completely stopped... magic! 🪄</p>
-        <button onclick="next()" class="glow-btn">🌟 Next Step ✨</button>
+        <h1 class="cute-msg">Our Vibe is Rare! 😌</h1>
+        <button onclick="next()" class="glow-btn">Next Step ✨</button>
     </div>
 
     <div id="slide4" class="slide">
-        <div class="text-7xl animate-bounce">💖</div>
-        <h1 class="cute-msg">How much do I adore you? 🤗</h1>
+        <div class="text-9xl mb-4" id="pulseHeart" style="transition: 0.3s;">💖</div>
+        <h1 class="text-2xl font-bold">How much do I adore you?</h1>
         <div class="hold-container"><div id="holdProgress"></div></div>
-        <button id="holdBtn" class="glow-btn">🎯 PRESS & HOLD TO FEEL 💕</button>
+        <button id="holdBtn" class="glow-btn mt-6 select-none">PRESS & HOLD TO FEEL</button>
     </div>
 
     <div id="slide5" class="slide">
         <img src="gif4.gif" class="gif-frame">
-        <h1 class="cute-msg">You're One in a Billion! 💎✨</h1>
-        <p class="sub-text">It's only been a short time, but the feeling is pure magic! 🦋</p>
-        <button onclick="next()" class="glow-btn">💫 Continue Journey...</button>
+        <h1 class="cute-msg">One in a Billion! 💎</h1>
+        <button onclick="next()" class="glow-btn">Continue...</button>
     </div>
 
     <div id="slide6" class="slide">
         <div class="solar-system">
-            <div class="orbit orbit-1" style="display:flex; justify-content:center; align-items:center;">💗</div>
-            <div class="orbit orbit-2" style="display:flex; justify-content:start; align-items:center;">⭐</div>
-            <div class="text-5xl">🌍</div>
+            <div class="orbit orbit-1"><span class="planet">💗</span></div>
+            <div class="orbit orbit-2"><span class="planet">⭐</span></div>
+            <div class="text-6xl">🌍</div>
         </div>
-        <h1 class="cute-msg mt-8">My Whole Universe! 🌌</h1>
-        <button onclick="next()" class="glow-btn">🚀 Keep Going Cosmos</button>
+        <h1 class="cute-msg mt-10">My Whole Universe!</h1>
+        <button onclick="next()" class="glow-btn">Keep Going 🚀</button>
     </div>
 
     <div id="slide7" class="slide">
         <img src="gif5.gif" class="gif-frame">
-        <h1 class="cute-msg">Don't ever leave! 🥺💖</h1>
-        <p class="sub-text">I've never met anyone as sweet and special as you! 🌹</p>
-        <button onclick="next()" class="glow-btn">⏳ Wait for it...</button>
+        <h1 class="cute-msg">Don't ever leave! 🥺</h1>
+        <button onclick="next()" class="glow-btn">Wait for it...</button>
     </div>
 
     <div id="slide8" class="slide">
-        <h1 class="cute-msg">You're my Brightest Star! ⭐🌟</h1>
-        <p class="sub-text">In a sky full of stars, my eyes only search for you! 💫</p>
-        <button onclick="next()" class="glow-btn">💎 Just a bit more ✨</button>
+        <h1 class="cute-msg">My Brightest Star! ⭐</h1>
+        <p class="sub-text">In a sky full of stars, my eyes only search for you.</p>
+        <button onclick="next()" class="glow-btn">Almost there ✨</button>
     </div>
 
     <div id="slide9" class="slide">
         <img src="gif6.gif" class="gif-frame">
-        <h1 class="cute-msg">Will You Be My Friend? ❤️🔥</h1>
-        <p class="sub-text">...and maybe something even more special? 💍✨</p>
-        <div class="flex gap-4 mt-4">
+        <h1 class="cute-msg">Be My Friend? ❤️</h1>
+        <div id="btnContainer" class="flex flex-wrap justify-center gap-4 mt-4">
             <button onclick="next()" class="glow-btn">YES! 😍</button>
-            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()" class="bg-gray-800 px-8 py-3 rounded-full">No 🥺</button>
+            <button id="noBtn" onclick="trapNo()" class="bg-gray-800 p-3 px-8 rounded-full">No 🥺</button>
         </div>
     </div>
 
     <div id="slide10" class="slide">
         <img src="gif7.gif" class="gif-frame">
-        <h1 class="cute-msg">Yaaay! My Heart is Happy! 🥳🎉</h1>
-        <button onclick="playFinale()" class="glow-btn animate-pulse">🎁 GRAND FINALE SURPRISE 🎊</button>
+        <h1 class="cute-msg">Yaaay! Happy Heart! 🥳</h1>
+        <button onclick="playSurprise()" class="glow-btn animate-bounce">A FINAL SURPRISE 🎁</button>
     </div>
 
     <div id="videoLayer">
         <video id="vPlayer" playsinline src="video1.mp4"></video>
     </div>
 
+    <div class="insta-tag">Follow on Insta: @smss1708</div>
+
     <script>
         let step = 1;
         const music = document.getElementById('bgMusic');
+        const vPlayer = document.getElementById('vPlayer');
 
-        // Create Stars (Performance Optimized)
-        const starContainer = document.getElementById('stars-container');
-        for(let i=0; i<70; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 3 + 'px';
-            star.style.width = size; star.style.height = size;
-            star.style.left = Math.random() * 100 + 'vw';
-            star.style.top = Math.random() * 100 + 'vh';
-            star.style.opacity = Math.random();
-            starContainer.appendChild(star);
+        // Fast Star Generation
+        const container = document.getElementById('stars-container');
+        for(let i=0; i<80; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            const size = Math.random()*3 + 1 + 'px';
+            s.style.width = size; s.style.height = size;
+            s.style.left = Math.random()*100 + 'vw';
+            s.style.top = Math.random()*100 + 'vh';
+            s.style.setProperty('--d', (Math.random()*2+1)+'s');
+            container.appendChild(s);
         }
 
-        function initAudio() { music.play().catch(()=>{}); }
+        function startApp() { 
+            music.play().catch(() => {}); 
+            next(); 
+        }
 
         function next() {
-            const current = document.getElementById(`slide${step}`);
-            current.classList.remove('active');
-            setTimeout(() => {
-                current.style.display = 'none';
-                step++;
-                const nextSlide = document.getElementById(`slide${step}`);
-                if(nextSlide) {
-                    nextSlide.style.display = 'flex';
+            const currentActive = document.querySelector('.slide.active');
+            if(currentActive) {
+                currentActive.classList.remove('active');
+                setTimeout(() => { currentActive.style.display = 'none'; }, 300);
+            }
+            
+            step++;
+            const nextSlide = document.getElementById('slide' + step);
+            if(nextSlide) { 
+                nextSlide.style.display = 'flex'; 
+                requestAnimationFrame(() => {
                     setTimeout(() => nextSlide.classList.add('active'), 50);
-                }
-            }, 400);
+                });
+            }
         }
 
-        // Moving No Button Logic
-        function moveNo() {
-            const btn = document.getElementById('noBtn');
-            btn.style.position = 'fixed';
-            btn.style.left = Math.random() * 70 + 10 + '%';
-            btn.style.top = Math.random() * 70 + 10 + '%';
+        function trapNo() {
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.display = 'none';
+            for(let i=0; i<3; i++) {
+                const b = document.createElement('button');
+                b.innerHTML = "YES! 💖";
+                b.className = "glow-btn";
+                b.onclick = next;
+                document.getElementById('btnContainer').appendChild(b);
+            }
         }
 
-        // Hold Logic
+        // Optimized Hold
         let hVal = 0, hInt;
-        const hBtn = document.getElementById('holdBtn');
-        const hProg = document.getElementById('holdProgress');
-
-        const startH = (e) => {
-            e.preventDefault();
-            hInt = setInterval(() => {
-                hVal += 1.5;
-                hProg.style.width = hVal + '%';
-                if(hVal >= 100) { clearInterval(hInt); next(); }
-            }, 30);
+        const hBtn = document.getElementById('holdBtn'), hProg = document.getElementById('holdProgress'), pHeart = document.getElementById('pulseHeart');
+        
+        const startH = (e) => { 
+            e.preventDefault(); 
+            pHeart.style.transform = 'scale(1.5)';
+            hInt = setInterval(() => { 
+                hVal += 2.5; 
+                hProg.style.width = hVal + '%'; 
+                if(hVal >= 100) { clearInterval(hInt); next(); } 
+            }, 30); 
         };
-        const endH = () => { clearInterval(hInt); hVal = 0; hProg.style.width = '0%'; };
+        const endH = () => { clearInterval(hInt); hVal = 0; hProg.style.width = '0%'; pHeart.style.transform = 'scale(1)'; };
+        
+        hBtn.onmousedown = hBtn.ontouchstart = startH; 
+        window.onmouseup = window.ontouchend = endH;
 
-        hBtn.addEventListener('mousedown', startH);
-        hBtn.addEventListener('touchstart', startH);
-        window.addEventListener('mouseup', endH);
-        window.addEventListener('touchend', endH);
-
-        // Finale Video
-        function playFinale() {
-            music.pause();
+        function playSurprise() { 
+            music.pause(); // Purely stop background music
+            music.currentTime = 0;
             const layer = document.getElementById('videoLayer');
-            const video = document.getElementById('vPlayer');
-            layer.style.display = 'block';
-            video.play();
-            video.onended = () => { layer.style.display = 'none'; music.play(); };
+            layer.style.display = 'flex';
+            vPlayer.play();
+            vPlayer.onended = () => { location.reload(); };
         }
     </script>
 </body>
